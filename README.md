@@ -1,2 +1,1 @@
-# BinaryImageSegmentation
-
+# Synthetic Data Augmentation
