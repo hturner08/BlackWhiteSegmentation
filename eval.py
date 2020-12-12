@@ -95,13 +95,13 @@ def evaluate(segmentation_module, loader, cfg, gpu):
         pbar.update(1)
 
     # summary
-    
+    dice_score = 2*intersection_meter.sum/(union_meter.sum+2*intersection_meter.sum+1e-10)
     iou = intersection_meter.sum / (union_meter.sum + 1e-10)
     for i, _iou in enumerate(iou):
         print('class [{}], IoU: {:.4f}'.format(i, _iou))
     print('[Eval Summary]:')
     print('Mean IoU: {:.4f}, Accuracy: {:.2f}%,Dice Score{:.4f}, Inference Time: {:.4f}s'
-          .format(iou.mean(), acc_meter.average()*100,dice_score, time_meter.average()))
+          .format(iou.mean(), acc_meter.average()*100,dice_score.mean(), time_meter.average()))
 
 
 def main(cfg, gpu):

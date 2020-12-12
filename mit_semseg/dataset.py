@@ -60,10 +60,10 @@ class BaseDataset(torch.utils.data.Dataset):
     def segm_transform(self, segm):
         # to tensor, -1 to 149
         segm = np.array(segm)
-        idx = [5, 2, 13, 7, 21, 83]
+        idx = [120, 143, 99, 42, 148]
         for i in range(len(idx)):
             segm = np.where(segm == idx[i],i+2,segm)
-        segm = np.where(segm>7,1,segm)
+        segm = np.where(segm>6,1,segm)
         segm = torch.from_numpy(segm).long() - 1
         return segm
 

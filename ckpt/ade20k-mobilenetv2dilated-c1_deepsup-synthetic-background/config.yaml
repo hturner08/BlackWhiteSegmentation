@@ -1,0 +1,41 @@
+DATASET:
+  imgMaxSize: 1000
+  imgSizes: (300, 375, 450, 525, 600)
+  list_train: ./data/syntheticbackground_train.odgt
+  list_val: ./data/limited_val.odgt
+  num_class: 6
+  padding_constant: 8
+  random_flip: True
+  root_dataset: ./data/
+  segm_downsampling_rate: 8
+DIR: ckpt/ade20k-mobilenetv2dilated-c1_deepsup-synthetic-background
+MODEL:
+  arch_decoder: c1_deepsup
+  arch_encoder: mobilenetv2dilated
+  fc_dim: 320
+  weights_decoder: 
+  weights_encoder: 
+TEST:
+  batch_size: 1
+  checkpoint: epoch_20.pth
+  result: ./
+TRAIN:
+  batch_size_per_gpu: 6
+  beta1: 0.9
+  deep_sup_scale: 0.4
+  disp_iter: 20
+  epoch_iters: 2500
+  fix_bn: False
+  lr_decoder: 0.02
+  lr_encoder: 0.02
+  lr_pow: 0.9
+  num_epoch: 20
+  optim: SGD
+  seed: 304
+  start_epoch: 0
+  weight_decay: 0.0001
+  workers: 20
+VAL:
+  batch_size: 1
+  checkpoint: epoch_20.pth
+  visualize: False
