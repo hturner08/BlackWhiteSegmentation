@@ -10,7 +10,7 @@ import torch
 import torch.nn as nn
 # Our libs
 from mit_semseg.config import cfg
-from mit_semseg.dataset import TrainDataset
+from mit_semseg.dataset import BWTrainDataset as TrainDataset
 from mit_semseg.models import ModelBuilder, SegmentationModule
 from mit_semseg.utils import AverageMeter, parse_devices, setup_logger
 from mit_semseg.lib.nn import UserScatteredDataParallel, user_scattered_collate, patch_replication_callback
@@ -38,7 +38,7 @@ def train(segmentation_module, iterator, optimizers, history, epoch, cfg):
         adjust_learning_rate(optimizers, cur_iter, cfg)
 
         # forward pass
-        loss, acc = segmentation_module(batch_data)
+        loss, acc = segmentation_module(batch_data[0])
         loss = loss.mean()
         acc = acc.mean()
 
